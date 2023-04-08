@@ -1,1 +1,3 @@
 # AI-meeting-room
+
+npm

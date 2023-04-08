@@ -1,3 +1,0 @@
-# AI-meeting-room
-
-npm

@@ -1,0 +1,22 @@
+{
+    "name": "your_project_name",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "parcel index.html",
+        "build": "parcel build index.html"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/core": "^7.21.3",
+        "parcel-bundler": "^1.12.5"
+    },
+    "dependencies": {
+        "dotenv": "^16.0.3",
+        "phaser": "^3.55.2",
+        "ws": "^8.13.0"
+    }
+}

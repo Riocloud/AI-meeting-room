@@ -10,6 +10,7 @@ Navigate to your project folder and run the following command to install Parcel 
 >
 >npm run start
 >
+>npm install ws
 # Need to do Changes 
 > - User authentication: Integrate a user authentication system (e.g., OAuth or JWT) to allow users to log in with an existing account, track their conversations, and save their avatars.
 >

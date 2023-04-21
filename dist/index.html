@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chatroom</title>
+  <style>body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    canvas {
+      display: none;
+    }
+    #loginForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100vh;
+    }</style>
+  <script type="module">
+    import { ChatroomScene } from './chatroom.js';
+    document.getElementById('loginButton').addEventListener('click', () => {
+      const username = document.getElementById('username').value;
+      const avatarInput = document.getElementById('avatar');
+      const avatarFile = avatarInput.files[0];
+
+      if (!username || !avatarFile) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        localStorage.setItem('username', username);
+        localStorage.setItem('avatar', e.target.result);
+        document.getElementById('loginForm').style.display = 'none';
+        document.querySelector('canvas').style.display = 'block';
+        initChatroom();
+      };
+      reader.readAsDataURL(avatarFile);
+    });
+
+    function initChatroom() {
+      const config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        backgroundColor: "#f0f0f0",
+        scene: [ChatroomScene],
+      };
+
+      const game = new Phaser.Game(config);
+    }
+  </script>
+</head>
+<body>
+  <div id="loginForm">
+    <h1>Login</h1>
+    <label for="username">Username:</label>
+    <input type="text" id="username" required="">
+    <label for="avatar">Avatar:</label>
+    <input type="file" id="avatar" accept="image/*" required="">
+    <button type="button" id="loginButton">Login</button>
+  </div>
+</body>
+</html>

@@ -24,6 +24,30 @@
       box-sizing: border-box;
       padding: 10px;
     }
+    #loginForm label,
+    #loginForm input,
+    #loginForm button {
+      margin-bottom: 10px;
+    }
+    #loginButton {
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-size: 16px;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+    #loginButton:hover {
+      background-color: #0069d9;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
     @media (max-width: 480px) {
       #loginForm {
         padding: 20px;
@@ -76,5 +100,39 @@
     <input type="file" id="avatar" accept="image/*" required />
     <button type="button" id="loginButton">Login</button>
   </div>
+  <script>
+    document.getElementById('loginButton').addEventListener('click', () => {
+      const username = document.getElementById('username').value;
+      const avatarInput = document.getElementById('avatar');
+      const avatarFile = avatarInput.files[0];
+
+      if (!username || !avatarFile) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        localStorage.setItem('username', username);
+        localStorage.setItem('avatar', e.target.result);
+        document.getElementById('loginForm').style.display = 'none';
+        document.querySelector('canvas').style.display = 'block';
+        initChatroom();
+      };
+      reader.readAsDataURL(avatarFile);
+    });
+
+    function initChatroom() {
+      const config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        backgroundColor: "#f0f0f0",
+        scene: [ChatroomScene],
+      };
+
+      const game = new Phaser.Game(config);
+    }
+  </script>
 </body>
 </html>
